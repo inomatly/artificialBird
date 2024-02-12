@@ -1,8 +1,8 @@
 /* 
- * File:   receiverMain.c
+ * File:   hardware.c
  * Author: tamag
  *
- * Created on 2024/02/12, 18:59
+ * Created on February 12, 2024, 8:15 PM
  */
 
 #include <stdio.h>
