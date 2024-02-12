@@ -30,28 +30,31 @@
     EXCEED AMOUNT OF FEES, IF ANY, YOU PAID DIRECTLY TO MICROCHIP FOR 
     THIS SOFTWARE.
 */
-#include "mcc_generated_files/system/system.h"
+#include "./mcc_generated_files/system/system.h"
+#include "main.h"
+#include <stdio.h>
 
+void debug_wait(long);
 /*
     Main application
 */
 
 int main(void)
 {
+    //g_intA=0;
     SYSTEM_Initialize();
-
     // If using interrupts in PIC18 High/Low Priority Mode you need to enable the Global High and Low Interrupts 
     // If using interrupts in PIC Mid-Range Compatibility Mode you need to enable the Global and Peripheral Interrupts 
     // Use the following macros to: 
 
     // Enable the Global Interrupts 
-   //INTERRUPT_GlobalInterruptEnable(); 
+    INTERRUPT_GlobalInterruptEnable(); 
 
     // Disable the Global Interrupts 
     //INTERRUPT_GlobalInterruptDisable(); 
 
     // Enable the Peripheral Interrupts 
-    //INTERRUPT_PeripheralInterruptEnable(); 
+    INTERRUPT_PeripheralInterruptEnable(); 
 
     // Disable the Peripheral Interrupts 
     //INTERRUPT_PeripheralInterruptDisable(); 
@@ -59,5 +62,11 @@ int main(void)
 
     while(1)
     {
+        //printf("%d\n",g_intA);
+        debug_wait(100000);
     }    
+}
+
+void debug_wait(long max){
+    for(long i=0;i<max;i++){;}
 }

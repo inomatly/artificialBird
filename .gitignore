@@ -53,5 +53,7 @@ dkms.conf
 
 # MPLAB configration
 Makefile
-nbproject
+nbproject/
 microPlane.mc3
+.vscode/
+microPlane.X.code-workspace

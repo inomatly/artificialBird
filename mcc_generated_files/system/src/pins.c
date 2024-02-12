@@ -33,13 +33,11 @@
 */
 
 #include "../pins.h"
+#include "../../../main.h"
 
 void (*SW1_InterruptHandler)(void);
 void (*SW2_InterruptHandler)(void);
 void (*SW3_InterruptHandler)(void);
-void (*OUT1_InterruptHandler)(void);
-void (*OUT2_InterruptHandler)(void);
-void (*OUT3_InterruptHandler)(void);
 
 void PIN_MANAGER_Initialize(void)
 {
@@ -104,7 +102,7 @@ void PIN_MANAGER_Initialize(void)
    /**
     IOCx registers 
     */
-    IOCAP = 0x3F;
+    IOCAP = 0x7;
     IOCAN = 0x0;
     IOCAF = 0x0;
     IOCBP = 0x0;
@@ -120,9 +118,6 @@ void PIN_MANAGER_Initialize(void)
     SW1_SetInterruptHandler(SW1_DefaultInterruptHandler);
     SW2_SetInterruptHandler(SW2_DefaultInterruptHandler);
     SW3_SetInterruptHandler(SW3_DefaultInterruptHandler);
-    OUT1_SetInterruptHandler(OUT1_DefaultInterruptHandler);
-    OUT2_SetInterruptHandler(OUT2_DefaultInterruptHandler);
-    OUT3_SetInterruptHandler(OUT3_DefaultInterruptHandler);
 
     // Enable PIE0bits.IOCIE interrupt 
     PIE0bits.IOCIE = 1; 
@@ -145,21 +140,6 @@ void PIN_MANAGER_IOC(void)
     {
         SW3_ISR();  
     }
-    // interrupt on change for pin OUT1}
-    if(IOCAFbits.IOCAF3 == 1)
-    {
-        OUT1_ISR();  
-    }
-    // interrupt on change for pin OUT2}
-    if(IOCAFbits.IOCAF4 == 1)
-    {
-        OUT2_ISR();  
-    }
-    // interrupt on change for pin OUT3}
-    if(IOCAFbits.IOCAF5 == 1)
-    {
-        OUT3_ISR();  
-    }
 }
    
 /**
@@ -168,7 +148,9 @@ void PIN_MANAGER_IOC(void)
 void SW1_ISR(void) {
 
     // Add custom IOCAF0 code
-
+    //extern int g_intA;
+    //g_intA=g_intA+1;
+    OUT1_Toggle();
     // Call the interrupt handler for the callback registered at runtime
     if(SW1_InterruptHandler)
     {
@@ -250,96 +232,6 @@ void SW3_SetInterruptHandler(void (* InterruptHandler)(void)){
 void SW3_DefaultInterruptHandler(void){
     // add your SW3 interrupt custom code
     // or set custom function using SW3_SetInterruptHandler()
-}
-   
-/**
-   OUT1 Interrupt Service Routine
-*/
-void OUT1_ISR(void) {
-
-    // Add custom IOCAF3 code
-
-    // Call the interrupt handler for the callback registered at runtime
-    if(OUT1_InterruptHandler)
-    {
-        OUT1_InterruptHandler();
-    }
-    IOCAFbits.IOCAF3 = 0;
-}
-
-/**
-  Allows selecting an interrupt handler for IOCAF3 at application runtime
-*/
-void OUT1_SetInterruptHandler(void (* InterruptHandler)(void)){
-    OUT1_InterruptHandler = InterruptHandler;
-}
-
-/**
-  Default interrupt handler for IOCAF3
-*/
-void OUT1_DefaultInterruptHandler(void){
-    // add your OUT1 interrupt custom code
-    // or set custom function using OUT1_SetInterruptHandler()
-}
-   
-/**
-   OUT2 Interrupt Service Routine
-*/
-void OUT2_ISR(void) {
-
-    // Add custom IOCAF4 code
-
-    // Call the interrupt handler for the callback registered at runtime
-    if(OUT2_InterruptHandler)
-    {
-        OUT2_InterruptHandler();
-    }
-    IOCAFbits.IOCAF4 = 0;
-}
-
-/**
-  Allows selecting an interrupt handler for IOCAF4 at application runtime
-*/
-void OUT2_SetInterruptHandler(void (* InterruptHandler)(void)){
-    OUT2_InterruptHandler = InterruptHandler;
-}
-
-/**
-  Default interrupt handler for IOCAF4
-*/
-void OUT2_DefaultInterruptHandler(void){
-    // add your OUT2 interrupt custom code
-    // or set custom function using OUT2_SetInterruptHandler()
-}
-   
-/**
-   OUT3 Interrupt Service Routine
-*/
-void OUT3_ISR(void) {
-
-    // Add custom IOCAF5 code
-
-    // Call the interrupt handler for the callback registered at runtime
-    if(OUT3_InterruptHandler)
-    {
-        OUT3_InterruptHandler();
-    }
-    IOCAFbits.IOCAF5 = 0;
-}
-
-/**
-  Allows selecting an interrupt handler for IOCAF5 at application runtime
-*/
-void OUT3_SetInterruptHandler(void (* InterruptHandler)(void)){
-    OUT3_InterruptHandler = InterruptHandler;
-}
-
-/**
-  Default interrupt handler for IOCAF5
-*/
-void OUT3_DefaultInterruptHandler(void){
-    // add your OUT3 interrupt custom code
-    // or set custom function using OUT3_SetInterruptHandler()
 }
 /**
  End of File

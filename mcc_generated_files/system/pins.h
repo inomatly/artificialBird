@@ -128,7 +128,6 @@
 #define OUT1_SetOpenDrain()       do { ODCONAbits.ODCA3 = 1; } while(0)
 #define OUT1_SetAnalogMode()      do { ANSELAbits.ANSA3 = 1; } while(0)
 #define OUT1_SetDigitalMode()     do { ANSELAbits.ANSA3 = 0; } while(0)
-#define RA3_SetInterruptHandler  OUT1_SetInterruptHandler
 // get/set IO_RA4 aliases
 #define OUT2_TRIS                 TRISAbits.TRISA4
 #define OUT2_LAT                  LATAbits.LATA4
@@ -148,7 +147,6 @@
 #define OUT2_SetOpenDrain()       do { ODCONAbits.ODCA4 = 1; } while(0)
 #define OUT2_SetAnalogMode()      do { ANSELAbits.ANSA4 = 1; } while(0)
 #define OUT2_SetDigitalMode()     do { ANSELAbits.ANSA4 = 0; } while(0)
-#define RA4_SetInterruptHandler  OUT2_SetInterruptHandler
 // get/set IO_RA5 aliases
 #define OUT3_TRIS                 TRISAbits.TRISA5
 #define OUT3_LAT                  LATAbits.LATA5
@@ -168,7 +166,6 @@
 #define OUT3_SetOpenDrain()       do { ODCONAbits.ODCA5 = 1; } while(0)
 #define OUT3_SetAnalogMode()      do { ANSELAbits.ANSA5 = 1; } while(0)
 #define OUT3_SetDigitalMode()     do { ANSELAbits.ANSA5 = 0; } while(0)
-#define RA5_SetInterruptHandler  OUT3_SetInterruptHandler
 /**
  * @ingroup  pinsdriver
  * @brief GPIO and peripheral I/O initialization
@@ -304,126 +301,6 @@ extern void (*SW3_InterruptHandler)(void);
  * @return none
  */
 void SW3_DefaultInterruptHandler(void);
-
-/**
- * @ingroup  pinsdriver
- * @brief Interrupt on Change Handler for the OUT1 pin functionality
- * @param none
- * @return none
- */
-void OUT1_ISR(void);
-
-/**
- * @ingroup  pinsdriver
- * @brief Interrupt Handler Setter for OUT1 pin interrupt-on-change functionality.
- *        Allows selecting an interrupt handler for OUT1 at application runtime.
- * @pre Pins intializer called
- * @param InterruptHandler function pointer.
- * @return none
- */
-void OUT1_SetInterruptHandler(void (* InterruptHandler)(void));
-
-/**
- * @ingroup  pinsdriver
- * @brief Dynamic Interrupt Handler for OUT1 pin.
- *        This is a dynamic interrupt handler to be used together with the OUT1_SetInterruptHandler() method.
- *        This handler is called every time the OUT1 ISR is executed and allows any function to be registered at runtime.
- * @pre Pins intializer called
- * @param none
- * @return none
- */
-extern void (*OUT1_InterruptHandler)(void);
-
-/**
- * @ingroup  pinsdriver
- * @brief Default Interrupt Handler for OUT1 pin. 
- *        This is a predefined interrupt handler to be used together with the OUT1_SetInterruptHandler() method.
- *        This handler is called every time the OUT1 ISR is executed. 
- * @pre Pins intializer called
- * @param none
- * @return none
- */
-void OUT1_DefaultInterruptHandler(void);
-
-/**
- * @ingroup  pinsdriver
- * @brief Interrupt on Change Handler for the OUT2 pin functionality
- * @param none
- * @return none
- */
-void OUT2_ISR(void);
-
-/**
- * @ingroup  pinsdriver
- * @brief Interrupt Handler Setter for OUT2 pin interrupt-on-change functionality.
- *        Allows selecting an interrupt handler for OUT2 at application runtime.
- * @pre Pins intializer called
- * @param InterruptHandler function pointer.
- * @return none
- */
-void OUT2_SetInterruptHandler(void (* InterruptHandler)(void));
-
-/**
- * @ingroup  pinsdriver
- * @brief Dynamic Interrupt Handler for OUT2 pin.
- *        This is a dynamic interrupt handler to be used together with the OUT2_SetInterruptHandler() method.
- *        This handler is called every time the OUT2 ISR is executed and allows any function to be registered at runtime.
- * @pre Pins intializer called
- * @param none
- * @return none
- */
-extern void (*OUT2_InterruptHandler)(void);
-
-/**
- * @ingroup  pinsdriver
- * @brief Default Interrupt Handler for OUT2 pin. 
- *        This is a predefined interrupt handler to be used together with the OUT2_SetInterruptHandler() method.
- *        This handler is called every time the OUT2 ISR is executed. 
- * @pre Pins intializer called
- * @param none
- * @return none
- */
-void OUT2_DefaultInterruptHandler(void);
-
-/**
- * @ingroup  pinsdriver
- * @brief Interrupt on Change Handler for the OUT3 pin functionality
- * @param none
- * @return none
- */
-void OUT3_ISR(void);
-
-/**
- * @ingroup  pinsdriver
- * @brief Interrupt Handler Setter for OUT3 pin interrupt-on-change functionality.
- *        Allows selecting an interrupt handler for OUT3 at application runtime.
- * @pre Pins intializer called
- * @param InterruptHandler function pointer.
- * @return none
- */
-void OUT3_SetInterruptHandler(void (* InterruptHandler)(void));
-
-/**
- * @ingroup  pinsdriver
- * @brief Dynamic Interrupt Handler for OUT3 pin.
- *        This is a dynamic interrupt handler to be used together with the OUT3_SetInterruptHandler() method.
- *        This handler is called every time the OUT3 ISR is executed and allows any function to be registered at runtime.
- * @pre Pins intializer called
- * @param none
- * @return none
- */
-extern void (*OUT3_InterruptHandler)(void);
-
-/**
- * @ingroup  pinsdriver
- * @brief Default Interrupt Handler for OUT3 pin. 
- *        This is a predefined interrupt handler to be used together with the OUT3_SetInterruptHandler() method.
- *        This handler is called every time the OUT3 ISR is executed. 
- * @pre Pins intializer called
- * @param none
- * @return none
- */
-void OUT3_DefaultInterruptHandler(void);
 
 
 #endif // PINS_H
