@@ -57,3 +57,6 @@ nbproject/
 microPlane.mc3
 .vscode/
 microPlane.X.code-workspace
+
+# Doxygen output
+docs/
