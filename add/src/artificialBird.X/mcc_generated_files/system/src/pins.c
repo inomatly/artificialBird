@@ -33,7 +33,6 @@
 */
 
 #include "../pins.h"
-#include "../../../main.h"
 
 void (*SW1_InterruptHandler)(void);
 void (*SW2_InterruptHandler)(void);
