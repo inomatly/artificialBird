@@ -20052,52 +20052,54 @@ extern void (*SW3_InterruptHandler)(void);
 # 303
 void SW3_DefaultInterruptHandler(void);
 
-# 37 "mcc_generated_files/system/src/pins.c"
+# 7 "mcc_generated_files/system/src/../../../headers/ledDrive.h"
+int ledDrive(void);
+
+# 40 "mcc_generated_files/system/src/pins.c"
 void (*SW1_InterruptHandler)(void);
 void (*SW2_InterruptHandler)(void);
 void (*SW3_InterruptHandler)(void);
 
-void PIN_MANAGER_Initialize(void)
-{
+void PIN_MANAGER_Initialize(void) {
 
-# 46
+# 48
 LATA = 0x0;
 LATB = 0x0;
 LATC = 0x0;
 
-# 53
+# 55
 TRISA = 0xC7;
 TRISB = 0xFF;
 TRISC = 0xFF;
 
-# 60
+# 62
 ANSELA = 0xC0;
 ANSELB = 0xFF;
 ANSELC = 0xFF;
 
-# 67
-WPUA = 0x0;
+# 69
+WPUA = 0x7;
 WPUB = 0x0;
 WPUC = 0x0;
 WPUE = 0x0;
 
-# 76
+# 78
 ODCONA = 0x0;
 ODCONB = 0x0;
 ODCONC = 0x0;
 
-# 82
+# 84
 SLRCONA = 0xFF;
 SLRCONB = 0xFF;
 SLRCONC = 0xFF;
 
-# 88
+# 90
 INLVLA = 0xFF;
 INLVLB = 0xFF;
 INLVLC = 0xFF;
 INLVLE = 0x8;
 
-# 104
+# 106
 IOCAP = 0x7;
 IOCAN = 0x0;
 IOCAF = 0x0;
@@ -20119,95 +20121,83 @@ SW3_SetInterruptHandler(SW3_DefaultInterruptHandler);
 PIE0bits.IOCIE = 1;
 }
 
-void PIN_MANAGER_IOC(void)
-{
+void PIN_MANAGER_IOC(void) {
 
-if(IOCAFbits.IOCAF0 == 1)
-{
+if (IOCAFbits.IOCAF0 == 1) {
 SW1_ISR();
 }
 
-if(IOCAFbits.IOCAF1 == 1)
-{
+if (IOCAFbits.IOCAF1 == 1) {
 SW2_ISR();
 }
 
-if(IOCAFbits.IOCAF2 == 1)
-{
+if (IOCAFbits.IOCAF2 == 1) {
 SW3_ISR();
 }
 }
 
-# 147
+# 145
 void SW1_ISR(void) {
 
+ledDrive();
 
-
-
-do { LATAbits.LATA3 = ~LATAbits.LATA3; } while(0);
-
-if(SW1_InterruptHandler)
-{
+if (SW1_InterruptHandler) {
 SW1_InterruptHandler();
 }
 IOCAFbits.IOCAF0 = 0;
 }
 
-# 164
-void SW1_SetInterruptHandler(void (* InterruptHandler)(void)){
+# 158
+void SW1_SetInterruptHandler(void (*InterruptHandler)(void)) {
 SW1_InterruptHandler = InterruptHandler;
 }
 
-# 171
-void SW1_DefaultInterruptHandler(void){
+# 165
+void SW1_DefaultInterruptHandler(void) {
 
 
 }
 
-# 179
+# 173
 void SW2_ISR(void) {
 
 
 
-
-if(SW2_InterruptHandler)
-{
+if (SW2_InterruptHandler) {
 SW2_InterruptHandler();
 }
 IOCAFbits.IOCAF1 = 0;
 }
 
-# 194
-void SW2_SetInterruptHandler(void (* InterruptHandler)(void)){
+# 186
+void SW2_SetInterruptHandler(void (*InterruptHandler)(void)) {
 SW2_InterruptHandler = InterruptHandler;
 }
 
-# 201
-void SW2_DefaultInterruptHandler(void){
+# 193
+void SW2_DefaultInterruptHandler(void) {
 
 
 }
 
-# 209
+# 201
 void SW3_ISR(void) {
 
 
 
-
-if(SW3_InterruptHandler)
-{
+if (SW3_InterruptHandler) {
 SW3_InterruptHandler();
 }
 IOCAFbits.IOCAF2 = 0;
 }
 
-# 224
-void SW3_SetInterruptHandler(void (* InterruptHandler)(void)){
+# 214
+void SW3_SetInterruptHandler(void (*InterruptHandler)(void)) {
 SW3_InterruptHandler = InterruptHandler;
 }
 
-# 231
-void SW3_DefaultInterruptHandler(void){
+# 221
+void SW3_DefaultInterruptHandler(void) {
 
 
 }

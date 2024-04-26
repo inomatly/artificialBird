@@ -2,7 +2,7 @@
 # 1 "ledDrive.c"
 
 # 7 "headers/ledDrive.h"
-int func(int a);
+int ledDrive(void);
 
 # 4 "C:\Program Files\Microchip\xc8\v2.30\pic\include\__size_t.h"
 typedef unsigned size_t;
@@ -20219,4 +20219,4 @@ void INT_DefaultInterruptHandler(void);
 void SYSTEM_Initialize(void);
 
 # 30 "ledDrive.c"
-int func(int a) { return a; }
+int ledDrive(void) { do { LATAbits.LATA3 = ~LATAbits.LATA3; } while(0); }

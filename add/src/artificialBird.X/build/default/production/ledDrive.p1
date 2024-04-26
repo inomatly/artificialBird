@@ -1,5 +1,13 @@
 Version 3.2 HI-TECH Software Intermediate Code
-[; ;ledDrive.h: 7: int func(int a);
+"790 C:\Program Files\Microchip\xc8\v2.30\pic\include\proc\pic16f18857.h
+[s S47 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S47 . LATA0 LATA1 LATA2 LATA3 LATA4 LATA5 LATA6 LATA7 ]
+"789
+[u S46 `S47 1 ]
+[n S46 . . ]
+"801
+[v _LATAbits `VS46 ~T0 @X0 0 e@22 ]
+[; ;ledDrive.h: 7: int ledDrive(void);
 [; ;__size_t.h: 4: typedef unsigned size_t;
 [; ;stdarg.h: 7: typedef void * va_list[1];
 [; ;stdarg.h: 10: extern void * __va_start(void);
@@ -13147,13 +13155,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupt.h: 175: void INT_DefaultInterruptHandler(void);
 [; ;system.h: 54: void SYSTEM_Initialize(void);
 "30 ledDrive.c
-[v _func `(i ~T0 @X0 1 ef1`i ]
+[v _ledDrive `(i ~T0 @X0 1 ef ]
 {
-[; ;ledDrive.c: 30: int func(int a) { return a; }
-[e :U _func ]
-[v _a `i ~T0 @X0 1 r1 ]
+[; ;ledDrive.c: 30: int ledDrive(void) { do { LATAbits.LATA3 = ~LATAbits.LATA3; } while(0); }
+[e :U _ledDrive ]
 [f ]
-[e ) _a ]
-[e $UE 1562  ]
+[e :U 1565 ]
+{
+[e = . . _LATAbits 0 3 -> ~ -> . . _LATAbits 0 3 `i `uc ]
+}
+[e :U 1564 ]
 [e :UE 1562 ]
 }

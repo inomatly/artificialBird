@@ -41,7 +41,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdio.h: 190: extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
 [; ;stdio.h: 194: extern int sprintf(char *, const char *, ...);
 [; ;stdio.h: 195: extern int printf(const char *, ...);
-[; ;ledDrive.h: 7: int func(int a);
+[; ;ledDrive.h: 7: int ledDrive(void);
 [; ;xc.h: 18: extern const char __xc8_OPTIM_SPEED;
 [; ;xc.h: 20: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -13128,44 +13128,44 @@ Version 3.2 HI-TECH Software Intermediate Code
 "64
 [e :U 1560 ]
 {
-"69
+"70
 }
 [e :U 1559 ]
 "64
 [e $U 1560  ]
 [e :U 1561 ]
-[; ;main.c: 69: }
 [; ;main.c: 70: }
-"70
+[; ;main.c: 71: }
+"71
 [e :UE 1558 ]
 }
-"72
+"73
 [v _debug_wait `(v ~T0 @X0 1 ef1`l ]
 {
-[; ;main.c: 72: void debug_wait(long max) {
+[; ;main.c: 73: void debug_wait(long max) {
 [e :U _debug_wait ]
 [v _max `l ~T0 @X0 1 r1 ]
 [f ]
-[; ;main.c: 73: for (long i = 0; i < max; i++) {
-"73
+[; ;main.c: 74: for (long i = 0; i < max; i++) {
+"74
 {
 [v _i `l ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `l ]
 [e $U 1566  ]
 [e :U 1563 ]
 {
-[; ;main.c: 74: ;
-"75
+[; ;main.c: 75: ;
+"76
 }
-"73
+"74
 [e ++ _i -> -> 1 `i `l ]
 [e :U 1566 ]
 [e $ < _i _max 1563  ]
 [e :U 1564 ]
-"75
-}
-[; ;main.c: 75: }
-[; ;main.c: 76: }
 "76
+}
+[; ;main.c: 76: }
+[; ;main.c: 77: }
+"77
 [e :UE 1562 ]
 }

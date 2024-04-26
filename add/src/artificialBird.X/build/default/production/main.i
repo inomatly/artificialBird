@@ -68,7 +68,7 @@ extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
 # 7 "headers/ledDrive.h"
-int func(int a);
+int ledDrive(void);
 
 # 18 "C:\Program Files\Microchip\xc8\v2.30\pic\include\xc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -20164,9 +20164,7 @@ SYSTEM_Initialize();
 
 while (1) {
 
-
-
-
+# 70
 }
 }
 

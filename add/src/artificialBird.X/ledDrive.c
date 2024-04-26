@@ -10,8 +10,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifndef CPPUTEST
 #include "mcc_generated_files/system/system.h"
-
+#endif
 /*
  * variable
  */
@@ -27,4 +28,10 @@
  ** @param a
  ** @return a
  */
-int func(int a) { return a; }
+int ledDrive(void) {
+#ifdef CPPUTEST
+    printf("mock");
+#else
+    OUT1_Toggle();
+#endif
+}

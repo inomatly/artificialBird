@@ -65,7 +65,8 @@ int main(void) {
         // printf("%d\n",g_intA);
         //printf("hello\n");
         //func(1);
-        //debug_wait(100000);
+        //debug_wait(10000);
+        
     }
 }
 
