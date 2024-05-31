@@ -61,7 +61,13 @@ microPlane.X.code-workspace
 # MPLAB objects
 *.i
 *.p1
-add/src/artificialBird_Controller.X/dist/default/production/artificialBird_Controller.X.production.*
+add/src/artificialBird.X/dist/default/production/artificialBird.X.production.*
+add/src/artificialBird.X/build/default/production/mcc_generated_files/system/src/*.i
+add/src/artificialBird.X/build/default/production/mcc_generated_files/system/src/*.p1
+add/src/artificialBird.X/build/default/production/*.i
+add/src/artificialBird.X/build/default/production/*.p1
+add/src/artificialBird.X/dist/default/production/*.i
+add/src/artificialBird.X/dist/default/production/*.p1
 
 # Doxygen output
 add/src/artificialBird.X/docs/

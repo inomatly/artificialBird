@@ -144,7 +144,7 @@ void PIN_MANAGER_IOC(void) {
 */
 void SW1_ISR(void) {
     // Add custom IOCAF0 code
-    DriveLed();
+    
     // Call the interrupt handler for the callback registered at runtime
     if (SW1_InterruptHandler) {
         SW1_InterruptHandler();  // これは消せない
