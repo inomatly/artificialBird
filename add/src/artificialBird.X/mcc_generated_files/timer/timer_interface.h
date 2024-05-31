@@ -1,16 +1,14 @@
-/**
- * Configuration Bits Generated Driver Header File
- * 
- * @file config_bits.h
- * 
- * @defgroup config_bitsdriver CONFIGBITS Driver 
- * 
- * @brief This file contains the API prototype for the Configuration Bits driver.
+/** 
+ * TMR Generated Driver API Header File
  *
- * @version Driver Version 2.0.2
+ * @file timer_interface.h
+ *  
+ * @defgroup timer_interface Timer interface
  *
- * @version Package Version 4.1.3
-*/
+ * @brief This header file provides interfaces to Timer APIs.
+ *
+ * @version TMR_interface Version 1.0.1
+ */
 
 /*
 ? [2024] Microchip Technology Inc. and its subsidiaries.
@@ -33,12 +31,32 @@
     THIS SOFTWARE.
 */
 
-#ifndef CONFIG_BITS_H
-#define	CONFIG_BITS_H
+#ifndef TMR_INTERFACE_H
+#define TMR_INTERFACE_H
 
-#include "../system/clock.h"
-
-#endif	/* CONFIG_BITS_H */
 /**
- End of File
-*/
+ * @brief This file contains API prototypes and other data types for the Timer interface.
+ * @{
+ */
+
+#include<stddef.h>
+        
+/**
+ @ingroup timer_interface
+ @struct TMR_INTERFACE
+ @brief This structure contains the interfaces to Timer module
+ */
+ 
+struct TMR_INTERFACE
+{
+    void (*Initialize)(void);
+    void (*Start)(void);
+    void (*Stop)(void);
+    void (*PeriodCountSet)(size_t count);
+    void (*TimeoutCallbackRegister)(void (* CallbackHandler)(void));
+    void (*Tasks)(void);
+};
+/**
+ * @}
+ */
+#endif //TMR_INTERFACE_H

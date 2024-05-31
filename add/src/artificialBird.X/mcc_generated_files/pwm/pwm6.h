@@ -1,15 +1,13 @@
 /**
- * System Driver Header File
- * 
- * @file system.h
- * 
- * @defgroup systemdriver System Driver
- * 
- * @brief This file contains the API prototype for the System Driver.
+ * PWM6 Generated Driver API Header File
  *
- * @version Driver Version 2.0.3
+ * @file pwm6.h
  *
- * @version Package Version 4.1.3
+ * @defgroup pwm6 PWM6
+ *
+ * @brief This file contains the API prototypes for the PWM6 driver.
+ *
+ * @version PWM6 Driver Version 2.0.3
 */
 
 /*
@@ -33,27 +31,37 @@
     THIS SOFTWARE.
 */
 
-#ifndef SYSTEM_H
-#define	SYSTEM_H
+#ifndef PWM6_H
+ #define PWM6_H
+ 
+ /**
+  * Section: Included Files
+  */
 
-#include <xc.h>
-#include <stdint.h>
-#include <stdbool.h>
-#include "config_bits.h"
-#include "../system/clock.h"
-#include "../system/pins.h"
-#include "../system/interrupt.h"
+ #include <xc.h>
+ #include <stdint.h>
+
+ /**
+  * Section: Macro Declarations
+ */
+
+ #define PWM6_INITIALIZE_DUTY_VALUE    511
+
 
 /**
- * @ingroup systemdriver
- * @brief Initializes the system module.
- * This routine is called only once during system initialization, before calling other APIs.
+ * @ingroup pwm6
+ * @brief Initializes the PWM6 interface.
  * @param None.
  * @return None.
-*/
-void SYSTEM_Initialize(void);
+ */
+ void PWM6_Initialize(void);
 
-#endif	/* SYSTEM_H */
-/**
- End of File
-*/
+ /**
+ * @ingroup pwm6
+ * @brief Loads the 16-bit duty cycle value.
+ * @param uint16_t dutyValue - PWM6 duty cycle value to be loaded.
+ * @return None.
+ */
+ void PWM6_LoadDutyValue(uint16_t dutyValue);
+ 
+ #endif	//PWM6_H
