@@ -7,7 +7,7 @@
  *
  * @brief This is the generated driver implementation file for the MAIN driver.
  *         Receiver side.
- * 
+ *
  * @version MAIN Driver Version 1.0.0
  */
 
@@ -59,15 +59,29 @@ int main(void) {
 
     // Enable the Peripheral Interrupts
     INTERRUPT_PeripheralInterruptEnable();
+    DriveLed(IoOFF);
 
     // Disable the Peripheral Interrupts
     // INTERRUPT_PeripheralInterruptDisable();
+    Timer1_Start();
+    Timer2_Start();
 
+    uint16_t Duty = 700;  // 0~1023
+    PWM6_LoadDutyValue(Duty);
+
+    int g_PwmRef = 1;
     while (1) {
-        // printf("%d\n",g_intA);
-        // printf("hello\n");
-        // func(1);
-        // debug_wait(10000);
+        // if (Duty > 1000) {
+        //     Duty = 100;
+        //  DriveLed(IoTOGGLE);
+        //}
+        PWM6_LoadDutyValue(Duty);
+        debug_wait(100000);
+        // Duty = Duty + 100;
+        g_PwmRef++;
+        if (g_PwmRef > 5) {
+            g_PwmRef = 1;
+        }
     }
 }
 

@@ -43,6 +43,7 @@
 #include "../system/clock.h"
 #include "../system/pins.h"
 #include "../pwm/pwm6.h"
+#include "../timer/tmr1.h"
 #include "../timer/tmr2.h"
 #include "../system/interrupt.h"
 

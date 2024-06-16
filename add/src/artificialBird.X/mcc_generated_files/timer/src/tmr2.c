@@ -2,9 +2,9 @@
  * TMR2 Generated Driver File
  *
  * @file tmr2.c
- * 
+ *
  * @ingroup  tmr2
- * 
+ *
  * @brief API implementations for the TMR2 module.
  *
  * @version TMR2 Driver Version 3.0.4
@@ -13,21 +13,21 @@
 /*
 ? [2024] Microchip Technology Inc. and its subsidiaries.
 
-    Subject to your compliance with these terms, you may use Microchip 
-    software and any derivatives exclusively with Microchip products. 
-    You are responsible for complying with 3rd party license terms  
-    applicable to your use of 3rd party software (including open source  
-    software) that may accompany Microchip software. SOFTWARE IS ?AS IS.? 
-    NO WARRANTIES, WHETHER EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS 
-    SOFTWARE, INCLUDING ANY IMPLIED WARRANTIES OF NON-INFRINGEMENT,  
-    MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT 
-    WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE, 
-    INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY 
-    KIND WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF 
-    MICROCHIP HAS BEEN ADVISED OF THE POSSIBILITY OR THE DAMAGES ARE 
-    FORESEEABLE. TO THE FULLEST EXTENT ALLOWED BY LAW, MICROCHIP?S 
-    TOTAL LIABILITY ON ALL CLAIMS RELATED TO THE SOFTWARE WILL NOT 
-    EXCEED AMOUNT OF FEES, IF ANY, YOU PAID DIRECTLY TO MICROCHIP FOR 
+    Subject to your compliance with these terms, you may use Microchip
+    software and any derivatives exclusively with Microchip products.
+    You are responsible for complying with 3rd party license terms
+    applicable to your use of 3rd party software (including open source
+    software) that may accompany Microchip software. SOFTWARE IS ?AS IS.?
+    NO WARRANTIES, WHETHER EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS
+    SOFTWARE, INCLUDING ANY IMPLIED WARRANTIES OF NON-INFRINGEMENT,
+    MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT
+    WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE,
+    INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY
+    KIND WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF
+    MICROCHIP HAS BEEN ADVISED OF THE POSSIBILITY OR THE DAMAGES ARE
+    FORESEEABLE. TO THE FULLEST EXTENT ALLOWED BY LAW, MICROCHIP?S
+    TOTAL LIABILITY ON ALL CLAIMS RELATED TO THE SOFTWARE WILL NOT
+    EXCEED AMOUNT OF FEES, IF ANY, YOU PAID DIRECTLY TO MICROCHIP FOR
     THIS SOFTWARE.
 */
 
@@ -35,8 +35,9 @@
   Section: Included Files
 */
 
-#include <xc.h>
 #include "../tmr2.h"
+
+#include <xc.h>
 
 const struct TMR_INTERFACE Timer2 = {
     .Initialize = TMR2_Initialize,
@@ -44,7 +45,7 @@ const struct TMR_INTERFACE Timer2 = {
     .Stop = TMR2_Stop,
     .PeriodCountSet = TMR2_PeriodCountSet,
     .TimeoutCallbackRegister = TMR2_OverflowCallbackRegister,
-    .Tasks = NULL
+    .Tasks = TMR2_Tasks
 };
 
 static void (*TMR2_OverflowCallback)(void);
@@ -57,31 +58,29 @@ static void TMR2_DefaultOverflowCallback(void);
 void TMR2_Initialize(void){
 
     // Set TMR2 to the options selected in the User Interface
-    // TCS HFINTOSC; 
-    T2CLKCON = 0x3;
-    // TMODE Software control; TCKSYNC Not Synchronized; TCKPOL Rising Edge; TPSYNC Not Synchronized; 
-    T2HLT = 0x0;
-    // TRSEL T2CKIPPS pin; 
+    // TCS FOSC/4; 
+    T2CLKCON = 0x1;
+    // TMODE Software control; TCKSYNC Synchronized; TCKPOL Rising Edge; TPSYNC Not Synchronized; 
+    T2HLT = 0x20;
+    // TRSEL T2CKIPPS pin;
     T2RST = 0x0;
-    // PR 255; 
-    T2PR = 0xFF;
-    // TMR 0x0; 
+    // PR 28; 
+    T2PR = 0x1C;
+    // TMR 0x0;
     T2TMR = 0x0;
 
     // Set default overflow callback
     TMR2_OverflowCallbackRegister(TMR2_DefaultOverflowCallback);
 
-    // Clearing IF flag before enabling the interrupt.
+    // Clearing IF flag.
     PIR4bits.TMR2IF = 0;
-    // Enabling TMR2 interrupt.
-    PIE4bits.TMR2IE = 1;
-    // TCKPS 1:1; TMRON on; TOUTPS 1:1; 
-    T2CON = 0x80;
+    // TCKPS 1:128; TMRON off; TOUTPS 1:10; 
+    T2CON = 0x79;
 }
 
 void TMR2_ModeSet(TMR2_HLT_MODE mode)
 {
-   // Configure different types HLT mode
+    // Configure different types HLT mode
     T2HLTbits.T2MODE = mode;
 }
 
@@ -121,25 +120,24 @@ void TMR2_PeriodCountSet(size_t periodVal)
    PR2 = (uint8_t) periodVal;
 }
 
-void TMR2_ISR(void)
-{
-    // clear the TMR2 interrupt flag
-     PIR4bits.TMR2IF = 0;
-
-    if(TMR2_OverflowCallback)
-    {
-        TMR2_OverflowCallback();
-    }
-}
-
 void TMR2_OverflowCallbackRegister(void (* InterruptHandler)(void))
 {
-   TMR2_OverflowCallback = InterruptHandler;
+    TMR2_OverflowCallback = InterruptHandler;
 }
 
 static void TMR2_DefaultOverflowCallback(void)
 {
     // add your TMR2 interrupt custom code
     // or set custom function using TMR2_OverflowCallbackRegister()
+}
+
+void TMR2_Tasks(void)
+{
+    if(PIR4bits.TMR2IF)
+    {
+        // Clearing IF flag.
+        PIR4bits.TMR2IF = 0;
+        TMR2_OverflowCallback();
+    }
 }
 

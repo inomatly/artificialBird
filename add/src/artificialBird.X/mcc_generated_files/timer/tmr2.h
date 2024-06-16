@@ -94,6 +94,12 @@
 #define Timer2_OverflowCallbackRegister TMR2_OverflowCallbackRegister
 
 /**
+ * @ingroup tmr2
+ * @brief Defines the Custom Name for the \ref TMR2_Tasks API
+ */
+#define Timer2_Tasks TMR2_Tasks
+
+/**
  @ingroup tmr2
  @struct TMR_INTERFACE
  @brief This is an instance of TMR_INTERFACE for TMR2 module.
@@ -387,20 +393,19 @@ void TMR2_PeriodCountSet(size_t periodVal);
 
 /**
  * @ingroup tmr2
- * @brief Interrupt Service Routine (ISR) for TMR2 overflow interrupt.
- * @param None.
- * @return None.
- */
-void TMR2_ISR(void);
-
-/**
- * @ingroup tmr2
  * @brief Setter function for the TMR2 overflow callback.
  * @param CallbackHandler - Pointer to the custom callback.
  * @return None.
  */
 void TMR2_OverflowCallbackRegister(void (* InterruptHandler)(void));
 
+/**
+ * @ingroup tmr2
+ * @brief Performs the tasks to be executed on timer overflow event.
+ * @param None.
+ * @return None.
+ */
+void TMR2_Tasks(void);
 
 #endif // TMR2_H
 /**

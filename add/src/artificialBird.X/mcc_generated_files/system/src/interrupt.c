@@ -65,9 +65,9 @@ void __interrupt() INTERRUPT_InterruptManager (void)
     }
     else if(INTCONbits.PEIE == 1)
     {
-        if(PIE4bits.TMR2IE == 1 && PIR4bits.TMR2IF == 1)
+        if(PIE4bits.TMR1IE == 1 && PIR4bits.TMR1IF == 1)
         {
-            TMR2_ISR();
+            Timer1_OverflowISR();
         } 
         else
         {

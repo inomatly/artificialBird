@@ -167,24 +167,24 @@
 #define OUT4_SetAnalogMode()      do { ANSELAbits.ANSA5 = 1; } while(0)
 #define OUT4_SetDigitalMode()     do { ANSELAbits.ANSA5 = 0; } while(0)
 // get/set IO_RA7 aliases
-#define PWM1_TRIS                 TRISAbits.TRISA7
-#define PWM1_LAT                  LATAbits.LATA7
-#define PWM1_PORT                 PORTAbits.RA7
-#define PWM1_WPU                  WPUAbits.WPUA7
-#define PWM1_OD                   ODCONAbits.ODCA7
-#define PWM1_ANS                  ANSELAbits.ANSA7
-#define PWM1_SetHigh()            do { LATAbits.LATA7 = 1; } while(0)
-#define PWM1_SetLow()             do { LATAbits.LATA7 = 0; } while(0)
-#define PWM1_Toggle()             do { LATAbits.LATA7 = ~LATAbits.LATA7; } while(0)
-#define PWM1_GetValue()           PORTAbits.RA7
-#define PWM1_SetDigitalInput()    do { TRISAbits.TRISA7 = 1; } while(0)
-#define PWM1_SetDigitalOutput()   do { TRISAbits.TRISA7 = 0; } while(0)
-#define PWM1_SetPullup()          do { WPUAbits.WPUA7 = 1; } while(0)
-#define PWM1_ResetPullup()        do { WPUAbits.WPUA7 = 0; } while(0)
-#define PWM1_SetPushPull()        do { ODCONAbits.ODCA7 = 0; } while(0)
-#define PWM1_SetOpenDrain()       do { ODCONAbits.ODCA7 = 1; } while(0)
-#define PWM1_SetAnalogMode()      do { ANSELAbits.ANSA7 = 1; } while(0)
-#define PWM1_SetDigitalMode()     do { ANSELAbits.ANSA7 = 0; } while(0)
+#define Motor1_TRIS                 TRISAbits.TRISA7
+#define Motor1_LAT                  LATAbits.LATA7
+#define Motor1_PORT                 PORTAbits.RA7
+#define Motor1_WPU                  WPUAbits.WPUA7
+#define Motor1_OD                   ODCONAbits.ODCA7
+#define Motor1_ANS                  ANSELAbits.ANSA7
+#define Motor1_SetHigh()            do { LATAbits.LATA7 = 1; } while(0)
+#define Motor1_SetLow()             do { LATAbits.LATA7 = 0; } while(0)
+#define Motor1_Toggle()             do { LATAbits.LATA7 = ~LATAbits.LATA7; } while(0)
+#define Motor1_GetValue()           PORTAbits.RA7
+#define Motor1_SetDigitalInput()    do { TRISAbits.TRISA7 = 1; } while(0)
+#define Motor1_SetDigitalOutput()   do { TRISAbits.TRISA7 = 0; } while(0)
+#define Motor1_SetPullup()          do { WPUAbits.WPUA7 = 1; } while(0)
+#define Motor1_ResetPullup()        do { WPUAbits.WPUA7 = 0; } while(0)
+#define Motor1_SetPushPull()        do { ODCONAbits.ODCA7 = 0; } while(0)
+#define Motor1_SetOpenDrain()       do { ODCONAbits.ODCA7 = 1; } while(0)
+#define Motor1_SetAnalogMode()      do { ANSELAbits.ANSA7 = 1; } while(0)
+#define Motor1_SetDigitalMode()     do { ANSELAbits.ANSA7 = 0; } while(0)
 // get/set IO_RB0 aliases
 #define OUT1_TRIS                 TRISBbits.TRISB0
 #define OUT1_LAT                  LATBbits.LATB0
@@ -204,6 +204,25 @@
 #define OUT1_SetOpenDrain()       do { ODCONBbits.ODCB0 = 1; } while(0)
 #define OUT1_SetAnalogMode()      do { ANSELBbits.ANSB0 = 1; } while(0)
 #define OUT1_SetDigitalMode()     do { ANSELBbits.ANSB0 = 0; } while(0)
+// get/set IO_RC1 aliases
+#define IO_RC1_TRIS                 TRISCbits.TRISC1
+#define IO_RC1_LAT                  LATCbits.LATC1
+#define IO_RC1_PORT                 PORTCbits.RC1
+#define IO_RC1_WPU                  WPUCbits.WPUC1
+#define IO_RC1_OD                   ODCONCbits.ODCC1
+#define IO_RC1_ANS                  ANSELCbits.ANSC1
+#define IO_RC1_SetHigh()            do { LATCbits.LATC1 = 1; } while(0)
+#define IO_RC1_SetLow()             do { LATCbits.LATC1 = 0; } while(0)
+#define IO_RC1_Toggle()             do { LATCbits.LATC1 = ~LATCbits.LATC1; } while(0)
+#define IO_RC1_GetValue()           PORTCbits.RC1
+#define IO_RC1_SetDigitalInput()    do { TRISCbits.TRISC1 = 1; } while(0)
+#define IO_RC1_SetDigitalOutput()   do { TRISCbits.TRISC1 = 0; } while(0)
+#define IO_RC1_SetPullup()          do { WPUCbits.WPUC1 = 1; } while(0)
+#define IO_RC1_ResetPullup()        do { WPUCbits.WPUC1 = 0; } while(0)
+#define IO_RC1_SetPushPull()        do { ODCONCbits.ODCC1 = 0; } while(0)
+#define IO_RC1_SetOpenDrain()       do { ODCONCbits.ODCC1 = 1; } while(0)
+#define IO_RC1_SetAnalogMode()      do { ANSELCbits.ANSC1 = 1; } while(0)
+#define IO_RC1_SetDigitalMode()     do { ANSELCbits.ANSC1 = 0; } while(0)
 /**
  * @ingroup  pinsdriver
  * @brief GPIO and peripheral I/O initialization

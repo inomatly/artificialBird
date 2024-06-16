@@ -54,15 +54,15 @@ void PIN_MANAGER_Initialize(void)
     TRISx registers
     */
     TRISA = 0x47;
-    TRISB = 0xFF;
-    TRISC = 0xFF;
+    TRISB = 0xFE;
+    TRISC = 0xFD;
 
     /**
     ANSELx registers
     */
     ANSELA = 0x40;
     ANSELB = 0xFE;
-    ANSELC = 0xFF;
+    ANSELC = 0xFD;
 
     /**
     WPUx registers
@@ -96,7 +96,7 @@ void PIN_MANAGER_Initialize(void)
     /**
     PPS registers
     */
-    RA7PPS = 0x0E;  //RA7->PWM6:PWM6OUT;
+    RC1PPS = 0x0E;  //RC1->PWM6:PWM6OUT;
 
     /**
     APFCON registers
@@ -155,7 +155,7 @@ void SW1_ISR(void) {
     // Call the interrupt handler for the callback registered at runtime
     if(SW1_InterruptHandler)
     {
-        SW1_InterruptHandler();  // これは消せない
+        SW1_InterruptHandler();
     }
     IOCAFbits.IOCAF0 = 0;
 }

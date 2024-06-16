@@ -48,14 +48,14 @@
     // CTSEL PWM6timer2; 
     CCPTMRS1bits.P6TSEL = 0x1;
 
-    // PWMPOL active_hi; PWMEN enabled; 
-    PWM6CON = 0x80;
+    // PWMPOL active_lo; PWMEN enabled; 
+    PWM6CON = 0x90;
 
-    // PWMDCH 127; 
-    PWM6DCH = 0x7F;
+    // PWMDCH 14; 
+    PWM6DCH = 0xE;
 
-    // PWMDCL 3; 
-    PWM6DCL = 0xC0;
+    // PWMDCL 1; 
+    PWM6DCL = 0x40;
 
  }
 
