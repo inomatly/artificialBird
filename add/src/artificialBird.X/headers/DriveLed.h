@@ -14,10 +14,7 @@ int DriveLed(int onoff);
 void wrLED1_SetHigh(void);
 void wrLED1_SetLow(void);
 void wrLED1_Toggle(void);
-void MakePWMformGPIO(int Duty, int SumOfNumeratorAndDenominator,
-                     int* LocalStep);
 enum IoControl { IoON, IoOFF, IoTOGGLE };
-
 #ifdef CPPUTEST
 #define OUT1_SetHigh() \
     { ; }

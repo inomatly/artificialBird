@@ -38,29 +38,6 @@ int DriveLed(int onoff) {
     return 0;
 }
 
-/**
- * @brief PWM信号を生成する関数
- * @param Duty Duty/分母
- * @param SumOfNumeratorAndDenominator 分子+分母
- * @param LocalStep 複数のPWMを生成する場合に分割するための入力。ポインタ
- * @return none
- */
-void MakePWMformGPIO(int Duty, int SumOfNumeratorAndDenominator,
-                     int* LocalStep) {
-    int RwmRef = 0;
-    int Step = *LocalStep;
-    RwmRef = (int)(SumOfNumeratorAndDenominator * Duty / 100);
-    if ((Step < RwmRef) && (Step >= 0)) {
-        DriveLed(IoON);
-    } else {
-        DriveLed(IoOFF);
-    }
-    if (Step == SumOfNumeratorAndDenominator - 1) {
-        Step = 0;
-    }
-    *LocalStep = Step + 1;
-}
-
 #ifndef CPPUTEST
 /**
  ** @brief MCCが生成するドライバーマクロのラッパー関数
