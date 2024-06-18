@@ -10,8 +10,7 @@
 #include "DriveLed.h"
 
 void MakePWMformGPIO(int Duty, int SumOfNumeratorAndDenominator,
-                     int* LocalStep);
-enum DriveTarget { DcMotor, ServoOne, ServoTwo, Led };
-
+                     int* LocalStep, int identifier);
+enum DriveTarget { DcMotor, ServoOne, ServoTwo, VisibleLed };
 
 #endif

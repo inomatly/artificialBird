@@ -29,7 +29,7 @@ TEST(MakePwmUT, PwmSignal_DutyCycle_Fifty) {
     mock().expectNCalls(5, "wrLED1_SetLow");
     
     for (int i = 0; i < SumOfNumeratorAndDenominator; ++i) {
-        MakePWMformGPIO(Duty, SumOfNumeratorAndDenominator, &LocalStep);
+        MakePWMformGPIO(Duty, SumOfNumeratorAndDenominator, &LocalStep, VisibleLed);
     }
 }
 
@@ -45,7 +45,7 @@ TEST(MakePwmUT, PwmSignal_DutyCycle_Thirty) {
     mock().expectNCalls(7, "wrLED1_SetLow");
     
     for (int i = 0; i < SumOfNumeratorAndDenominator; ++i) {
-        MakePWMformGPIO(Duty, SumOfNumeratorAndDenominator, &LocalStep);
+        MakePWMformGPIO(Duty, SumOfNumeratorAndDenominator, &LocalStep, VisibleLed);
     }
 }
 
@@ -61,7 +61,7 @@ TEST(MakePwmUT, OddPeriod_DutyCycle_Fifty) {
     mock().expectNCalls(3, "wrLED1_SetLow");
     
     for (int i = 0; i < SumOfNumeratorAndDenominator; ++i) {
-        MakePWMformGPIO(Duty, SumOfNumeratorAndDenominator, &LocalStep);
+        MakePWMformGPIO(Duty, SumOfNumeratorAndDenominator, &LocalStep, VisibleLed);
     }
 }
 
@@ -76,7 +76,7 @@ TEST(MakePwmUT, LocalStepResetAfterMaxValue) {
     mock().expectNCalls(5, "wrLED1_SetLow");
     mock().expectNCalls(6, "wrLED1_SetHigh");
     for (int i = 0; i < 11; ++i) {
-        MakePWMformGPIO(Duty, SumOfNumeratorAndDenominator, &LocalStep);
+        MakePWMformGPIO(Duty, SumOfNumeratorAndDenominator, &LocalStep, VisibleLed);
     }
 }
 
@@ -89,7 +89,7 @@ TEST(MakePwmUT, PwmSignalEdgeCases_Zero) {
     int LocalStep = 0;
     mock().expectNCalls(10, "wrLED1_SetLow");
     for (int i = 0; i < 10; ++i) {
-        MakePWMformGPIO(Duty, SumOfNumeratorAndDenominator, &LocalStep);
+        MakePWMformGPIO(Duty, SumOfNumeratorAndDenominator, &LocalStep, VisibleLed);
     }
 }
 
@@ -103,6 +103,6 @@ TEST(MakePwmUT, PwmSignalEdgeCases_Full) {
 
     mock().expectNCalls(10, "wrLED1_SetHigh");
     for (int i = 0; i < 10; ++i) {
-        MakePWMformGPIO(Duty, SumOfNumeratorAndDenominator, &LocalStep);
+        MakePWMformGPIO(Duty, SumOfNumeratorAndDenominator, &LocalStep, VisibleLed);
     }
 }
