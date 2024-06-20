@@ -37,10 +37,6 @@
 
 #include "../../../headers/DriveLed.h"
 
-void (*SW1_InterruptHandler)(void);
-void (*SW2_InterruptHandler)(void);
-void (*SW3_InterruptHandler)(void);
-
 void PIN_MANAGER_Initialize(void)
 {
     /**
@@ -53,22 +49,22 @@ void PIN_MANAGER_Initialize(void)
     /**
     TRISx registers
     */
-    TRISA = 0x47;
-    TRISB = 0xFE;
-    TRISC = 0xFD;
+    TRISA = 0xFE;
+    TRISB = 0xFF;
+    TRISC = 0xE5;
 
     /**
     ANSELx registers
     */
-    ANSELA = 0x40;
-    ANSELB = 0xFE;
-    ANSELC = 0xFD;
+    ANSELA = 0xF8;
+    ANSELB = 0xCF;
+    ANSELC = 0xE5;
 
     /**
     WPUx registers
     */
-    WPUA = 0x7;
-    WPUB = 0x0;
+    WPUA = 0x6;
+    WPUB = 0x30;
     WPUC = 0x0;
     WPUE = 0x0;
 
@@ -96,7 +92,7 @@ void PIN_MANAGER_Initialize(void)
     /**
     PPS registers
     */
-    RC1PPS = 0x0E;  //RC1->PWM6:PWM6OUT;
+    RC4PPS = 0x0E;  //RC4->PWM6:PWM6OUT;
 
     /**
     APFCON registers
@@ -105,7 +101,7 @@ void PIN_MANAGER_Initialize(void)
     /**
      IOCx registers
      */
-    IOCAP = 0x7;
+    IOCAP = 0x2;
     IOCAN = 0x0;
     IOCAF = 0x0;
     IOCBP = 0x0;
@@ -118,9 +114,7 @@ void PIN_MANAGER_Initialize(void)
     IOCEN = 0x0;
     IOCEF = 0x0;
 
-    SW1_SetInterruptHandler(SW1_DefaultInterruptHandler);
-    SW2_SetInterruptHandler(SW2_DefaultInterruptHandler);
-    SW3_SetInterruptHandler(SW3_DefaultInterruptHandler);
+    PHOTO1_SetInterruptHandler(PHOTO1_DefaultInterruptHandler);
 
     // Enable PIE0bits.IOCIE interrupt
     PIE0bits.IOCIE = 1;
@@ -128,64 +122,24 @@ void PIN_MANAGER_Initialize(void)
 
 void PIN_MANAGER_IOC(void)
 {
-    // interrupt on change for pin SW1}
-    if(IOCAFbits.IOCAF0 == 1)
-    {
-        SW1_ISR();
-    }
-    // interrupt on change for pin SW2}
+    // interrupt on change for pin PHOTO1}
     if(IOCAFbits.IOCAF1 == 1)
     {
-        SW2_ISR();
+        PHOTO1_ISR();  
     }
-    // interrupt on change for pin SW3}
-    if(IOCAFbits.IOCAF2 == 1)
-    {
-        SW3_ISR();
     }
-}
 
 /**
-   SW1 Interrupt Service Routine
+   PHOTO1 Interrupt Service Routine
 */
-void SW1_ISR(void) {
-
-    // Add custom IOCAF0 code
-    
-    // Call the interrupt handler for the callback registered at runtime
-    if(SW1_InterruptHandler)
-    {
-        SW1_InterruptHandler();
-    }
-    IOCAFbits.IOCAF0 = 0;
-}
-
-/**
-  Allows selecting an interrupt handler for IOCAF0 at application runtime
-*/
-void SW1_SetInterruptHandler(void (* InterruptHandler)(void)){
-    SW1_InterruptHandler = InterruptHandler;
-}
-
-/**
-  Default interrupt handler for IOCAF0
-*/
-void SW1_DefaultInterruptHandler(void){
-    // add your SW1 interrupt custom code
-    // or set custom function using SW1_SetInterruptHandler()
-}
-
-/**
-   SW2 Interrupt Service Routine
-*/
-void SW2_ISR(void) {
+void PHOTO1_ISR(void) {
 
     // Add custom IOCAF1 code
 
     // Call the interrupt handler for the callback registered at runtime
-    if(SW2_InterruptHandler)
+    if(PHOTO1_InterruptHandler)
     {
-        SW2_InterruptHandler();
+        PHOTO1_InterruptHandler();
     }
     IOCAFbits.IOCAF1 = 0;
 }
@@ -193,46 +147,16 @@ void SW2_ISR(void) {
 /**
   Allows selecting an interrupt handler for IOCAF1 at application runtime
 */
-void SW2_SetInterruptHandler(void (* InterruptHandler)(void)){
-    SW2_InterruptHandler = InterruptHandler;
+void PHOTO1_SetInterruptHandler(void (* InterruptHandler)(void)){
+    PHOTO1_InterruptHandler = InterruptHandler;
 }
 
 /**
   Default interrupt handler for IOCAF1
 */
-void SW2_DefaultInterruptHandler(void){
-    // add your SW2 interrupt custom code
-    // or set custom function using SW2_SetInterruptHandler()
-}
-
-/**
-   SW3 Interrupt Service Routine
-*/
-void SW3_ISR(void) {
-
-    // Add custom IOCAF2 code
-
-    // Call the interrupt handler for the callback registered at runtime
-    if(SW3_InterruptHandler)
-    {
-        SW3_InterruptHandler();
-    }
-    IOCAFbits.IOCAF2 = 0;
-}
-
-/**
-  Allows selecting an interrupt handler for IOCAF2 at application runtime
-*/
-void SW3_SetInterruptHandler(void (* InterruptHandler)(void)){
-    SW3_InterruptHandler = InterruptHandler;
-}
-
-/**
-  Default interrupt handler for IOCAF2
-*/
-void SW3_DefaultInterruptHandler(void){
-    // add your SW3 interrupt custom code
-    // or set custom function using SW3_SetInterruptHandler()
+void PHOTO1_DefaultInterruptHandler(void){
+    // add your PHOTO1 interrupt custom code
+    // or set custom function using PHOTO1_SetInterruptHandler()
 }
 /**
  End of File
