@@ -39,6 +39,7 @@
 #include <xc.h>
 
 #include "../../../headers/DriveLed.h"
+#include "../../../headers/MakePwm.h"
 
 /**
  * Section: Global Variables Definitions
@@ -159,7 +160,7 @@ void TMR1_OverflowCallbackRegister(void (*CallbackHandler)(void)) {
 static void TMR1_DefaultOverflowCallback(void) {
     // Add your interrupt code here or
     // Use TMR1_OverflowCallbackRegister function to use Custom ISR
-    MakePWMformGPIO();
+    //MakePWMformGPIO();
 }
 
 bool TMR1_HasOverflowOccured(void) { return (PIR4bits.TMR1IF); }

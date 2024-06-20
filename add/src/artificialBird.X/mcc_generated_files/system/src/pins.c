@@ -37,8 +37,9 @@
 
 #include "../../../headers/DriveLed.h"
 
-void PIN_MANAGER_Initialize(void)
-{
+void (*PHOTO1_InterruptHandler)(void);
+
+void PIN_MANAGER_Initialize(void) {
     /**
      LATx registers
      */
@@ -92,7 +93,7 @@ void PIN_MANAGER_Initialize(void)
     /**
     PPS registers
     */
-    RC4PPS = 0x0E;  //RC4->PWM6:PWM6OUT;
+    RC4PPS = 0x0E;  // RC4->PWM6:PWM6OUT;
 
     /**
     APFCON registers
@@ -120,25 +121,21 @@ void PIN_MANAGER_Initialize(void)
     PIE0bits.IOCIE = 1;
 }
 
-void PIN_MANAGER_IOC(void)
-{
+void PIN_MANAGER_IOC(void) {
     // interrupt on change for pin PHOTO1}
-    if(IOCAFbits.IOCAF1 == 1)
-    {
-        PHOTO1_ISR();  
+    if (IOCAFbits.IOCAF1 == 1) {
+        PHOTO1_ISR();
     }
-    }
+}
 
 /**
    PHOTO1 Interrupt Service Routine
 */
 void PHOTO1_ISR(void) {
-
     // Add custom IOCAF1 code
 
     // Call the interrupt handler for the callback registered at runtime
-    if(PHOTO1_InterruptHandler)
-    {
+    if (PHOTO1_InterruptHandler) {
         PHOTO1_InterruptHandler();
     }
     IOCAFbits.IOCAF1 = 0;
@@ -147,14 +144,14 @@ void PHOTO1_ISR(void) {
 /**
   Allows selecting an interrupt handler for IOCAF1 at application runtime
 */
-void PHOTO1_SetInterruptHandler(void (* InterruptHandler)(void)){
+void PHOTO1_SetInterruptHandler(void (*InterruptHandler)(void)) {
     PHOTO1_InterruptHandler = InterruptHandler;
 }
 
 /**
   Default interrupt handler for IOCAF1
 */
-void PHOTO1_DefaultInterruptHandler(void){
+void PHOTO1_DefaultInterruptHandler(void) {
     // add your PHOTO1 interrupt custom code
     // or set custom function using PHOTO1_SetInterruptHandler()
 }

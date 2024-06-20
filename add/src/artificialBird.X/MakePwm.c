@@ -20,8 +20,7 @@
  * @param LocalStep 複数のPWMを生成する場合に分割するための入力。ポインタ
  * @return none
  */
-void MakePWMformGPIO(int Duty, int SumOfNumeratorAndDenominator, int* LocalStep,
-                     int identifier) {
+void MakePWMformGPIO(int Duty, int SumOfNumeratorAndDenominator, int* LocalStep, int identifier) {
     int RwmRef = 0;
     int Step = *LocalStep;
     RwmRef = (int)(SumOfNumeratorAndDenominator * Duty / 100);
