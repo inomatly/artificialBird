@@ -6,14 +6,15 @@ extern "C" {
 #include "src/artificialBird.X/headers/MakePwm.h"
 }
 
-TEST_GROUP(MakePwmUT){void setup(){mock().clear();
-}
-void teardown() {
-    // mock().checkExpectations();     //期待する呼び出しが行われたことを確認
-    mock().clear();  // モックをクリア //mockは()を忘れずに
-}
-}
-;  // TEST_GROUPには「;」が必要。構造体で実装しているらしい。
+TEST_GROUP(MakePwmUT){
+    void setup(){
+        mock().clear();
+    }
+    void teardown() {
+        // mock().checkExpectations();     //期待する呼び出しが行われたことを確認
+        mock().clear();  // モックをクリア //mockは()を忘れずに
+    }
+};  // TEST_GROUPには「;」が必要。構造体で実装しているらしい。
 
 
 
